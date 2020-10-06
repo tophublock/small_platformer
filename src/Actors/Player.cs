@@ -3,8 +3,9 @@ using System;
 
 public class Player : KinematicBody2D
 {
-    const int GRAVITY = 30;
-    const int SPEED = 200;
+    const int GRAVITY = 100;
+    const int SPEED = 500;
+    const int JUMP_HEIGHT = 10000;
     public Vector2 UP = Vector2.Up;
     private Vector2 motion = new Vector2(0, 0);
 
@@ -26,9 +27,13 @@ public class Player : KinematicBody2D
             motion.x -= SPEED;
         }
 
-        if (Input.IsActionPressed("ui_up"))
+        //if (this.IsOnFloor() && Input.IsActionPressed("ui_up"))
+        if (this.IsOnFloor())
         {
-            motion.y -= (SPEED * 2);
+            if (Input.IsActionPressed("ui_up"))
+            {
+                motion.y = -JUMP_HEIGHT;
+            }
         }
 
         motion = this.MoveAndSlide(motion, UP);
