@@ -3,7 +3,7 @@ using System;
 
 public class Player : KinematicBody2D
 {
-    const int GRAVITY = 20;
+    const int GRAVITY = 30;
     const int SPEED = 200;
     public Vector2 UP = Vector2.Up;
     private Vector2 motion = new Vector2(0, 0);
