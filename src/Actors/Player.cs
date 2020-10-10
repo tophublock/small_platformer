@@ -8,12 +8,16 @@ public class Player : KinematicBody2D
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
     private Vector2 _motion;
-    private AnimatedSprite _sprite;
+    private AnimatedSprite _player;
+    private Sprite _weapon;
 
     public override void _Ready()
     {
-        _sprite = GetNode<AnimatedSprite>("Sprites/PlayerSprite");
-        _sprite.Play("idle");
+        _player = GetNode<AnimatedSprite>("PlayerSprite");
+        _player.Play("idle");
+
+        _weapon = GetNode<Sprite>("Weapon/WeaponSprite");
+        //_weapon.Hide();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -23,14 +27,16 @@ public class Player : KinematicBody2D
         if (Input.IsActionPressed("ui_right"))
         {
             _motion.x += SPEED;
-            _sprite.Play("walk");
-            _sprite.FlipH = false;
+            _player.Play("walk");
+            _player.FlipH = false;
+            _weapon.Scale = new Vector2(1, 1);
         }
         else if (Input.IsActionPressed("ui_left"))
         {
             _motion.x -= SPEED;
-            _sprite.Play("walk");
-            _sprite.FlipH = true;
+            _player.Play("walk");
+            _player.FlipH = true;
+            _weapon.Scale = new Vector2(-1, 1);
         }
 
         if (this.IsOnFloor())
@@ -41,12 +47,12 @@ public class Player : KinematicBody2D
             }
             else if (_motion.x == 0)
             {
-                _sprite.Play("idle");
+                _player.Play("idle");
             }
         }
         else
         {
-            _sprite.Play("jump");
+            _player.Play("jump");
         }
 
         _motion = this.MoveAndSlide(_motion, UP);

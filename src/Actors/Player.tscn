@@ -65,11 +65,11 @@ script = ExtResource( 2 )
 frames = SubResource( 1 )
 animation = "idle"
 
-[node name="Weapon" type="Node2D" parent="."]
+[node name="Weapon" type="Area2D" parent="."]
 
 [node name="WeaponSprite" type="Sprite" parent="Weapon"]
-position = Vector2( 11, 3 )
 texture = ExtResource( 12 )
+offset = Vector2( 11, 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
 position = Vector2( 11.5, 3 )
