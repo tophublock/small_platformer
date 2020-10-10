@@ -35,6 +35,7 @@ public class Player : KinematicBody2D
 
         if (this.IsOnFloor())
         {
+            Console.WriteLine("on floor");
             if (Input.IsActionPressed("ui_up"))
             {
                 _motion.y += JUMP_POWER;
@@ -46,6 +47,7 @@ public class Player : KinematicBody2D
         }
         else
         {
+            Console.WriteLine("not on floor");
             _sprite.Play("jump");
         }
 
