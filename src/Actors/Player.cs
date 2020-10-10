@@ -7,31 +7,48 @@ public class Player : KinematicBody2D
     const int SPEED = 125;
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
-    private Vector2 motion ;
+    private Vector2 _motion;
+    private AnimatedSprite _sprite;
 
     public override void _Ready()
     {
-        
+        _sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        _sprite.Play("idle");
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        motion.x = 0;
-        motion.y += GRAVITY; // gravity
+        _motion.x = 0;
+        _motion.y += GRAVITY;
         if (Input.IsActionPressed("ui_right"))
         {
-            motion.x += SPEED;
+            _motion.x += SPEED;
+            _sprite.Play("walk");
+            _sprite.FlipH = false;
         }
         else if (Input.IsActionPressed("ui_left"))
         {
-            motion.x -= SPEED;
+            _motion.x -= SPEED;
+            _sprite.Play("walk");
+            _sprite.FlipH = true;
         }
 
-        if (this.IsOnFloor() && Input.IsActionPressed("ui_up"))
+        if (this.IsOnFloor())
         {
-            motion.y += JUMP_POWER;
+            if (Input.IsActionPressed("ui_up"))
+            {
+                _motion.y += JUMP_POWER;
+            }
+            else if (_motion.x == 0)
+            {
+                _sprite.Play("idle");
+            }
+        }
+        else
+        {
+            _sprite.Play("jump");
         }
 
-        motion = this.MoveAndSlide(motion, UP);
+        _motion = this.MoveAndSlide(_motion, UP);
     }
 }
