@@ -12,7 +12,7 @@ public class Player : KinematicBody2D
 
     public override void _Ready()
     {
-        _sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        _sprite = GetNode<AnimatedSprite>("Sprites/PlayerSprite");
         _sprite.Play("idle");
     }
 
