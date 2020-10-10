@@ -12,5 +12,12 @@ public class Weapon : Area2D
 
     }
 
-
+    public void OnWeaponBodyEntered(Node body)
+    {
+        if (body is Player player)
+        {
+            // Make player pick up weapon
+            Console.WriteLine("player picked me up");
+        }
+    }
 }
