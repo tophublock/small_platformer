@@ -247,8 +247,8 @@ points = PoolVector2Array( 21, 21, 7.62939e-06, 21, 7.62939e-06, 7.62939e-06, 21
 
 [node name="Game" type="Node"]
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 21, 254 )
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 21, 251 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 84, 105 )

@@ -27,13 +27,9 @@ public class Player : KinematicBody2D
             motion.x -= SPEED;
         }
 
-        //if (this.IsOnFloor() && Input.IsActionPressed("ui_up"))
-        if (Input.IsActionPressed("ui_up"))
+        if (this.IsOnFloor() && Input.IsActionPressed("ui_up"))
         {
-            if (this.IsOnFloor())
-            {
-                motion.y += JUMP_POWER;
-            }
+            motion.y += JUMP_POWER;
         }
 
         motion = this.MoveAndSlide(motion, UP);
