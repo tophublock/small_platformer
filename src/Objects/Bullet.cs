@@ -3,10 +3,9 @@ using System;
 
 public class Bullet : Area2D
 {
-    const int SPEED = 50;
+    const int SPEED = 200;
     public Vector2 Direction = Vector2.Right;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         

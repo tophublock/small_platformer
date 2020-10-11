@@ -31,9 +31,12 @@ public class Weapon : Area2D
     {
         Bullet b = _bulletScene.Instance() as Bullet;
         b.Direction = this.Direction;
-        b.Position = _bulletStartPosition.Position;
 
-        //Node game = GetTree().Root.GetNode("Game");
-        this.AddChild(b);
+        Player parent = this.GetParent() as Player;
+        b.Position = _bulletStartPosition.Position + parent.Position;
+        Console.WriteLine(b.Position);
+
+        Node game = GetTree().Root.GetNode("Game");
+        game.AddChild(b);
     }
 }
