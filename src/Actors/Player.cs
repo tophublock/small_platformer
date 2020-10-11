@@ -84,16 +84,22 @@ public class Player : KinematicBody2D
         if (obj is Weapon weapon)
         {
             weapon.Hide();
-            Node game = GetTree().Root.GetNode<Node>("Game");
-            game.RemoveChild(weapon);
-
+            this.CallDeferred(nameof(AdoptChild), weapon);
             weapon.Scale = Vector2.One;
-            weapon.SetDeferred("position", _weaponPosition.Position);
-            this.AddChild(weapon);
+            weapon.Position = _weaponPosition.Position;
             weapon.Show();
 
             _weapon = weapon;
             _weaponSprite = weapon.GetNode<Sprite>("Sprite");
         }
+    }
+
+    // https://godotengine.org/qa/1754/how-to-change-the-parent-of-a-node-from-gdscript
+    // Might be better to use _Process and a flag to reparent
+    private void AdoptChild(Node child)
+    {
+        Node parent = child.GetParent();
+        parent.RemoveChild(child);
+        this.AddChild(child);
     }
 }
