@@ -11,15 +11,16 @@ public class Player : KinematicBody2D
     private AnimatedSprite _playerSprite;
     private Sprite _weaponSprite;
     private Position2D _weaponPosition;
+    private Weapon _weapon;
 
     public override void _Ready()
     {
         _playerSprite = GetNode<AnimatedSprite>("PlayerSprite");
         _playerSprite.Play("idle");
 
-        _weaponSprite = GetNode<Sprite>("WeaponTemp/WeaponSprite");
+        _weapon = null;
+        _weaponSprite = null;
         _weaponPosition = GetNode<Position2D>("WeaponPosition");
-        //_weapon.Hide();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -30,15 +31,13 @@ public class Player : KinematicBody2D
         {
             _motion.x += SPEED;
             _playerSprite.Play("walk");
-            _playerSprite.FlipH = false;
-            //_weaponSprite.Scale = new Vector2(1, 1);
+            FaceRight();
         }
         else if (Input.IsActionPressed("ui_left"))
         {
             _motion.x -= SPEED;
             _playerSprite.Play("walk");
-            _playerSprite.FlipH = true;
-            //_weaponSprite.Scale = new Vector2(-1, 1);
+            FaceLeft();
         }
 
         if (this.IsOnFloor())
@@ -60,6 +59,26 @@ public class Player : KinematicBody2D
         _motion = this.MoveAndSlide(_motion, UP);
     }
 
+    private void FaceRight()
+    {
+        _playerSprite.FlipH = false;
+        if (_weapon != null)
+        {
+            _weaponSprite.Scale = new Vector2(1, 1);
+            _weapon.Position = _weaponPosition.Position;
+        }
+    }
+
+    private void FaceLeft()
+    {
+        _playerSprite.FlipH = true;
+        if (_weapon != null)
+        {
+            _weaponSprite.Scale = new Vector2(-1, 1);
+            _weapon.Position = new Vector2(-_weaponPosition.Position.x, _weaponPosition.Position.y);
+        }
+    }
+
     public void PickUpObject(Node obj)
     {
         if (obj is Weapon weapon)
@@ -72,6 +91,9 @@ public class Player : KinematicBody2D
             weapon.SetDeferred("position", _weaponPosition.Position);
             this.AddChild(weapon);
             weapon.Show();
+
+            _weapon = weapon;
+            _weaponSprite = weapon.GetNode<Sprite>("Sprite");
         }
     }
 }
