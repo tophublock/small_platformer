@@ -8,15 +8,17 @@ public class Player : KinematicBody2D
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
     private Vector2 _motion;
-    private AnimatedSprite _player;
-    private Sprite _weapon;
+    private AnimatedSprite _playerSprite;
+    private Sprite _weaponSprite;
+    private Position2D _weaponPosition;
 
     public override void _Ready()
     {
-        _player = GetNode<AnimatedSprite>("PlayerSprite");
-        _player.Play("idle");
+        _playerSprite = GetNode<AnimatedSprite>("PlayerSprite");
+        _playerSprite.Play("idle");
 
-        _weapon = GetNode<Sprite>("Weapon/WeaponSprite");
+        _weaponSprite = GetNode<Sprite>("WeaponTemp/WeaponSprite");
+        _weaponPosition = GetNode<Position2D>("WeaponPosition");
         //_weapon.Hide();
     }
 
@@ -27,16 +29,16 @@ public class Player : KinematicBody2D
         if (Input.IsActionPressed("ui_right"))
         {
             _motion.x += SPEED;
-            _player.Play("walk");
-            _player.FlipH = false;
-            _weapon.Scale = new Vector2(1, 1);
+            _playerSprite.Play("walk");
+            _playerSprite.FlipH = false;
+            //_weaponSprite.Scale = new Vector2(1, 1);
         }
         else if (Input.IsActionPressed("ui_left"))
         {
             _motion.x -= SPEED;
-            _player.Play("walk");
-            _player.FlipH = true;
-            _weapon.Scale = new Vector2(-1, 1);
+            _playerSprite.Play("walk");
+            _playerSprite.FlipH = true;
+            //_weaponSprite.Scale = new Vector2(-1, 1);
         }
 
         if (this.IsOnFloor())
@@ -47,14 +49,29 @@ public class Player : KinematicBody2D
             }
             else if (_motion.x == 0)
             {
-                _player.Play("idle");
+                _playerSprite.Play("idle");
             }
         }
         else
         {
-            _player.Play("jump");
+            _playerSprite.Play("jump");
         }
 
         _motion = this.MoveAndSlide(_motion, UP);
+    }
+
+    public void PickUpObject(Node obj)
+    {
+        if (obj is Weapon weapon)
+        {
+            weapon.Hide();
+            Node game = GetTree().Root.GetNode<Node>("Game");
+            game.RemoveChild(weapon);
+
+            weapon.Scale = Vector2.One;
+            weapon.SetDeferred("position", _weaponPosition.Position);
+            this.AddChild(weapon);
+            weapon.Show();
+        }
     }
 }

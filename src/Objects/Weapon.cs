@@ -16,8 +16,8 @@ public class Weapon : Area2D
     {
         if (body is Player player)
         {
-            // Make player pick up weapon
             Console.WriteLine("player picked me up");
+            player.PickUpObject(this);
         }
     }
 }

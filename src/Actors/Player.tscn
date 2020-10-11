@@ -25,6 +25,16 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "climb",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "fly",
@@ -35,26 +45,16 @@ animations = [ {
 "name": "crouch",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "climb",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "hit",
 "speed": 0.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4.5, 3 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 10.5 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -65,15 +65,19 @@ script = ExtResource( 2 )
 frames = SubResource( 1 )
 animation = "idle"
 
-[node name="Weapon" type="Area2D" parent="."]
+[node name="WeaponPosition" type="Position2D" parent="."]
+position = Vector2( 11, 3 )
 
-[node name="WeaponSprite" type="Sprite" parent="Weapon"]
+[node name="WeaponTemp" type="Area2D" parent="."]
+visible = false
+
+[node name="WeaponSprite" type="Sprite" parent="WeaponTemp"]
 texture = ExtResource( 12 )
 offset = Vector2( 11, 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponTemp"]
 position = Vector2( 11.5, 3 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
