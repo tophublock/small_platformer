@@ -7,6 +7,7 @@ public class Player : KinematicBody2D
     const int SPEED = 125;
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
+    private bool _isFacingRight;
     private Vector2 _motion;
     private AnimatedSprite _playerSprite;
     private Sprite _weaponSprite;
@@ -15,6 +16,7 @@ public class Player : KinematicBody2D
 
     public override void _Ready()
     {
+        _isFacingRight = true;
         _playerSprite = GetNode<AnimatedSprite>("PlayerSprite");
         _playerSprite.Play("idle");
 
@@ -31,13 +33,19 @@ public class Player : KinematicBody2D
         {
             _motion.x += SPEED;
             _playerSprite.Play("walk");
-            FaceRight();
+            if (!_isFacingRight)
+            {
+                FaceRight();
+            }
         }
         else if (Input.IsActionPressed("ui_left"))
         {
             _motion.x -= SPEED;
             _playerSprite.Play("walk");
-            FaceLeft();
+            if (_isFacingRight)
+            {
+                FaceLeft();
+            }
         }
 
         if (this.IsOnFloor())
@@ -61,6 +69,7 @@ public class Player : KinematicBody2D
 
     private void FaceRight()
     {
+        _isFacingRight = true;
         _playerSprite.FlipH = false;
         if (_weapon != null)
         {
@@ -71,6 +80,7 @@ public class Player : KinematicBody2D
 
     private void FaceLeft()
     {
+        _isFacingRight = false;
         _playerSprite.FlipH = true;
         if (_weapon != null)
         {
