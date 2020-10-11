@@ -7,11 +7,15 @@ public class Weapon : Area2D
     private double _shootCountdownSec = 0.0;
     private double _shootDelaySec = 0.5;
     private Position2D _bulletStartPosition;
+    private Position2D _bulletStartPositionMirrored;
     private PackedScene _bulletScene;
 
     public override void _Ready()
     {
         _bulletStartPosition = GetNode<Position2D>("BulletPosition");
+        _bulletStartPositionMirrored = new Position2D();
+        _bulletStartPositionMirrored.Position = new Vector2(-_bulletStartPosition.Position.x, _bulletStartPosition.Position.y);
+
         _bulletScene = ResourceLoader.Load("res://src/Objects/Bullet.tscn") as PackedScene;
     }
 
@@ -31,13 +35,15 @@ public class Weapon : Area2D
 
     public void Shoot()
     {
+        // Maybe change to shooting when space is pressed down, not using timer
         if (_shootCountdownSec <= 0)
         {
             Bullet b = _bulletScene.Instance() as Bullet;
             b.Direction = this.Direction;
 
             Player parent = this.GetParent() as Player;
-            b.Position = _bulletStartPosition.Position + parent.Position;
+            b.Position = (b.Direction == Vector2.Right) ? _bulletStartPosition.Position : _bulletStartPositionMirrored.Position;
+            b.Position += parent.Position + this.Position;
 
             Node game = GetTree().Root.GetNode("Game");
             game.AddChild(b);
