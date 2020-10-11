@@ -80,8 +80,9 @@ public class Player : KinematicBody2D
         _playerSprite.FlipH = false;
         if (_weapon != null)
         {
-            _weaponSprite.Scale = new Vector2(1, 1);
+            _weapon.Direction = Vector2.Right;
             _weapon.Position = _weaponPosition.Position;
+            _weaponSprite.Scale = new Vector2(1, 1);
         }
     }
 
@@ -92,8 +93,9 @@ public class Player : KinematicBody2D
         _playerSprite.FlipH = true;
         if (_weapon != null)
         {
-            _weaponSprite.Scale = new Vector2(-1, 1);
+            _weapon.Direction = Vector2.Left;
             _weapon.Position = new Vector2(-_weaponPosition.Position.x, _weaponPosition.Position.y);
+            _weaponSprite.Scale = new Vector2(-1, 1);
         }
     }
 

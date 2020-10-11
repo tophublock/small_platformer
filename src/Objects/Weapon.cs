@@ -3,6 +3,7 @@ using System;
 
 public class Weapon : Area2D
 {
+    public Vector2 Direction = Vector2.Right;
     private Position2D _bulletStartPosition;
     private PackedScene _bulletScene;
 
@@ -29,7 +30,10 @@ public class Weapon : Area2D
     public void Shoot()
     {
         Bullet b = _bulletScene.Instance() as Bullet;
+        b.Direction = this.Direction;
         b.Position = _bulletStartPosition.Position;
+
+        //Node game = GetTree().Root.GetNode("Game");
         this.AddChild(b);
     }
 }
