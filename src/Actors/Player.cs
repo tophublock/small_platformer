@@ -69,6 +69,7 @@ public class Player : KinematicBody2D
 
     private void FaceRight()
     {
+        Console.WriteLine("facing right");
         _isFacingRight = true;
         _playerSprite.FlipH = false;
         if (_weapon != null)
@@ -80,6 +81,7 @@ public class Player : KinematicBody2D
 
     private void FaceLeft()
     {
+        Console.WriteLine("facing left");
         _isFacingRight = false;
         _playerSprite.FlipH = true;
         if (_weapon != null)
@@ -91,6 +93,7 @@ public class Player : KinematicBody2D
 
     public void PickUpObject(Node obj)
     {
+        Console.WriteLine("picked up object");
         if (obj is Weapon weapon)
         {
             weapon.Hide();
