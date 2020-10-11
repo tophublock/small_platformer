@@ -4,6 +4,8 @@ using System;
 public class Weapon : Area2D
 {
     public Vector2 Direction = Vector2.Right;
+    private double _shootCountdownSec = 0.0;
+    private double _shootDelaySec = 0.5;
     private Position2D _bulletStartPosition;
     private PackedScene _bulletScene;
 
@@ -15,7 +17,7 @@ public class Weapon : Area2D
 
     public override void _Process(float delta)
     {
-
+        _shootCountdownSec -= delta;
     }
 
     public void OnWeaponBodyEntered(Node body)
@@ -29,14 +31,18 @@ public class Weapon : Area2D
 
     public void Shoot()
     {
-        Bullet b = _bulletScene.Instance() as Bullet;
-        b.Direction = this.Direction;
+        if (_shootCountdownSec <= 0)
+        {
+            Bullet b = _bulletScene.Instance() as Bullet;
+            b.Direction = this.Direction;
 
-        Player parent = this.GetParent() as Player;
-        b.Position = _bulletStartPosition.Position + parent.Position;
-        Console.WriteLine(b.Position);
+            Player parent = this.GetParent() as Player;
+            b.Position = _bulletStartPosition.Position + parent.Position;
 
-        Node game = GetTree().Root.GetNode("Game");
-        game.AddChild(b);
+            Node game = GetTree().Root.GetNode("Game");
+            game.AddChild(b);
+
+            _shootCountdownSec = _shootDelaySec;
+        }
     }
 }
