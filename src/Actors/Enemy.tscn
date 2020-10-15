@@ -25,7 +25,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 9, 5.5 )
+extents = Vector2( 8.5, 5.5 )
 
 [node name="Enemy" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
@@ -38,3 +38,8 @@ animation = "walk"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 4.5 )
 shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( -7.5, -1 )
+enabled = true
+cast_to = Vector2( 0, 13 )
