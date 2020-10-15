@@ -21,4 +21,9 @@ public class Bullet : Area2D
     {
         QueueFree();
     }
+
+    public void OnBulletBodyEntered(Node body)
+    {
+        QueueFree();
+    }
 }

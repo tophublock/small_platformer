@@ -20,4 +20,5 @@ shape = SubResource( 1 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -1.49012e-07, -2.98023e-08 )
 scale = Vector2( 0.15, 0.15 )
+[connection signal="body_entered" from="." to="." method="OnBulletBodyEntered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="OnVisibilityNotifier2DScreenExited"]
