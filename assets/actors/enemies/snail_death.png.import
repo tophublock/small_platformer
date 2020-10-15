@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_climb1.png-567a4944ea095ae47e99440dcc696516.stex"
+path="res://.import/snail_death.png-57aa336ac16efaec6f47dee12668de70.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/actors/player_climb1.png"
-dest_files=[ "res://.import/player_climb1.png-567a4944ea095ae47e99440dcc696516.stex" ]
+source_file="res://assets/actors/enemies/snail_death.png"
+dest_files=[ "res://.import/snail_death.png-57aa336ac16efaec6f47dee12668de70.stex" ]
 
 [params]
 

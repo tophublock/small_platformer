@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_climb2.png-79872e9e755d337b3c8532a0e283a837.stex"
+path="res://.import/player_fly1.png-58aaf399c60f1b7269c49a58bb5eecc5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/actors/player_climb2.png"
-dest_files=[ "res://.import/player_climb2.png-79872e9e755d337b3c8532a0e283a837.stex" ]
+source_file="res://assets/actors/player/player_fly1.png"
+dest_files=[ "res://.import/player_fly1.png-58aaf399c60f1b7269c49a58bb5eecc5.stex" ]
 
 [params]
 
