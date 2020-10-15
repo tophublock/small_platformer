@@ -64,7 +64,7 @@ public class Player : KinematicBody2D
             _playerSprite.Play("jump");
         }
 
-        if (Input.IsKeyPressed((int)KeyList.Space) && _weapon != null)
+        if (Input.IsActionJustPressed("ui_select")&& _weapon != null)
         {
             Console.WriteLine("shoot");
             _weapon.Shoot();
