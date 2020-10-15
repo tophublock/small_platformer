@@ -7,7 +7,7 @@ public class Player : KinematicBody2D
     const int SPEED = 125;
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
-    private bool _isFacingRight;
+    private bool _isFacingRight; // TODO: replace with Vector2 Direction
     private Vector2 _motion;
     private AnimatedSprite _playerSprite;
     private Sprite _weaponSprite;
