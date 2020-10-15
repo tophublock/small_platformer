@@ -16,4 +16,9 @@ public class Bullet : Area2D
         Vector2 velocity = new Vector2(SPEED * Direction.x * delta, SPEED * Direction.y * delta);
         this.Position += velocity;
     }
+
+    public void OnVisibilityNotifier2DScreenExited()
+    {
+        QueueFree();
+    }
 }
