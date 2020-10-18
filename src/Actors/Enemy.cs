@@ -29,5 +29,19 @@ public class Enemy : KinematicBody2D
             Direction.x *= -1;
             _rayCast.Position = new Vector2(-1 *_rayCast.Position.x + 2.5f, _rayCast.Position.y);
         }
+
+        ProcessCollisions();
+    }
+
+    private void ProcessCollisions()
+    {
+        for (int i = 0; i < GetSlideCount(); i++)
+        {
+            var collision = GetSlideCollision(i);
+            if (collision.Collider is Player player)
+            {
+                player.Hit();
+            }
+        }
     }
 }

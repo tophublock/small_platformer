@@ -76,7 +76,6 @@ public class Player : KinematicBody2D
         }
 
         _motion = this.MoveAndSlide(_motion, UP);
-        ProcessCollisions();
     }
 
     private void FaceRight()
@@ -127,19 +126,6 @@ public class Player : KinematicBody2D
         _playerSprite.Play(animation);
     }
 
-    private void ProcessCollisions()
-    {
-        int count = GetSlideCount();
-        for (int i = 0; i < GetSlideCount(); i++)
-        {
-            var collision = GetSlideCollision(i);
-            if (collision.Collider is Enemy enemy)
-            {
-                Hit();
-            }
-        }
-    }
-
     public void PickUpObject(Node obj)
     {
         Console.WriteLine("picked up object");
@@ -169,7 +155,7 @@ public class Player : KinematicBody2D
     {
         Console.WriteLine("hit");
         _health--;
-        _playerSprite.Play("hit");
+        PlayAnimation("hit");
         if (_health == 0)
         {
             Die();
