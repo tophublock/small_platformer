@@ -33,7 +33,8 @@ public class Player : KinematicBody2D
         if (Input.IsActionPressed("ui_right"))
         {
             _motion.x += SPEED;
-            _playerSprite.Play("walk");
+            PlayAnimation("walk");
+            //_playerSprite.Play("walk");
             if (!_isFacingRight)
             {
                 FaceRight();
@@ -42,7 +43,8 @@ public class Player : KinematicBody2D
         else if (Input.IsActionPressed("ui_left"))
         {
             _motion.x -= SPEED;
-            _playerSprite.Play("walk");
+            PlayAnimation("walk");
+            //_playerSprite.Play("walk");
             if (_isFacingRight)
             {
                 FaceLeft();
@@ -57,12 +59,14 @@ public class Player : KinematicBody2D
             }
             else if (_motion.x == 0)
             {
-                _playerSprite.Play("idle");
+                PlayAnimation("idle");
+                //_playerSprite.Play("idle");
             }
         }
         else
         {
-            _playerSprite.Play("jump");
+            PlayAnimation("jump");
+            //_playerSprite.Play("jump");
         }
 
         if (Input.IsActionJustPressed("ui_select")&& _weapon != null)
@@ -99,6 +103,28 @@ public class Player : KinematicBody2D
             _weapon.Position = new Vector2(-_weaponPosition.Position.x, _weaponPosition.Position.y);
             _weaponSprite.Scale = new Vector2(-1, 1);
         }
+    }
+
+    // Handler for playing animations
+    // Always let "hit" interrupt animations
+    // Always let "hit" finish
+    private void PlayAnimation(string animation)
+    {
+        string currAnimation = _playerSprite.Animation;
+        if (animation == "hit")
+        {
+            _playerSprite.Play(animation);
+            return;
+        }
+
+        if (currAnimation == "hit")
+        {
+            while (_playerSprite.Frame < _playerSprite.Frames.GetFrameCount("hit") - 1)
+            {
+                ;
+            }
+        }
+        _playerSprite.Play(animation);
     }
 
     private void ProcessCollisions()
