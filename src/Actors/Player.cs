@@ -7,6 +7,7 @@ public class Player : KinematicBody2D
     const int SPEED = 125;
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
+    private bool _isHit = false;
     private bool _isFacingRight; // TODO: replace with Vector2 Direction
     private int _health = 5;
     private Vector2 _motion;
@@ -34,7 +35,6 @@ public class Player : KinematicBody2D
         {
             _motion.x += SPEED;
             PlayAnimation("walk");
-            //_playerSprite.Play("walk");
             if (!_isFacingRight)
             {
                 FaceRight();
@@ -44,7 +44,6 @@ public class Player : KinematicBody2D
         {
             _motion.x -= SPEED;
             PlayAnimation("walk");
-            //_playerSprite.Play("walk");
             if (_isFacingRight)
             {
                 FaceLeft();
@@ -60,16 +59,14 @@ public class Player : KinematicBody2D
             else if (_motion.x == 0)
             {
                 PlayAnimation("idle");
-                //_playerSprite.Play("idle");
             }
         }
         else
         {
             PlayAnimation("jump");
-            //_playerSprite.Play("jump");
         }
 
-        if (Input.IsActionJustPressed("ui_select")&& _weapon != null)
+        if (Input.IsActionJustPressed("ui_select") && _weapon != null)
         {
             Console.WriteLine("shoot");
             _weapon.Shoot();
@@ -110,6 +107,10 @@ public class Player : KinematicBody2D
     private void PlayAnimation(string animation)
     {
         string currAnimation = _playerSprite.Animation;
+        Console.WriteLine("currently playing");
+        Console.WriteLine(currAnimation);
+        Console.WriteLine("want to play");
+        Console.WriteLine(animation);
         if (animation == "hit")
         {
             _playerSprite.Play(animation);
@@ -118,12 +119,18 @@ public class Player : KinematicBody2D
 
         if (currAnimation == "hit")
         {
-            while (_playerSprite.Frame < _playerSprite.Frames.GetFrameCount("hit") - 1)
+            Console.WriteLine(_playerSprite.Frame);
+            Console.WriteLine(_playerSprite.Frames.GetFrameCount("hit"));
+            if (_playerSprite.Frame == _playerSprite.Frames.GetFrameCount("hit") - 1)
             {
-                ;
+                _playerSprite.Play(animation);
+                _isHit = false;
             }
         }
-        _playerSprite.Play(animation);
+        else
+        {
+            _playerSprite.Play(animation);
+        }
     }
 
     public void PickUpObject(Node obj)
@@ -154,6 +161,7 @@ public class Player : KinematicBody2D
     public void Hit()
     {
         Console.WriteLine("hit");
+        _isHit = true;
         _health--;
         PlayAnimation("hit");
         if (_health == 0)
