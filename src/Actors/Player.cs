@@ -8,6 +8,7 @@ public class Player : KinematicBody2D
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
     private bool _isFacingRight; // TODO: replace with Vector2 Direction
+    private int _health = 5;
     private Vector2 _motion;
     private AnimatedSprite _playerSprite;
     private Sprite _weaponSprite;
@@ -71,6 +72,7 @@ public class Player : KinematicBody2D
         }
 
         _motion = this.MoveAndSlide(_motion, UP);
+        ProcessCollisions();
     }
 
     private void FaceRight()
@@ -99,6 +101,19 @@ public class Player : KinematicBody2D
         }
     }
 
+    private void ProcessCollisions()
+    {
+        int count = GetSlideCount();
+        for (int i = 0; i < GetSlideCount(); i++)
+        {
+            var collision = GetSlideCollision(i);
+            if (collision.Collider is Enemy enemy)
+            {
+                Hit();
+            }
+        }
+    }
+
     public void PickUpObject(Node obj)
     {
         Console.WriteLine("picked up object");
@@ -122,5 +137,22 @@ public class Player : KinematicBody2D
         Node parent = child.GetParent();
         parent.RemoveChild(child);
         this.AddChild(child);
+    }
+
+    public void Hit()
+    {
+        Console.WriteLine("hit");
+        _health--;
+        _playerSprite.Play("hit");
+        if (_health == 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        // Fade away player
+        //QueueFree();
     }
 }
