@@ -72,10 +72,9 @@ public class Enemy : KinematicBody2D
 
     private void Fade()
     {
-        Console.WriteLine("enemy dies");
         _isDead = true;
         _sprite.Play("death");
-
+        
         // Fade out enemy
         var tween = GetNode<Tween>("Tween");
         var startColor = new Color(1.0f, 1.0f, 1.0f);
@@ -84,6 +83,11 @@ public class Enemy : KinematicBody2D
             this, "modulate", startColor, endColor, 1.0f, Tween.TransitionType.Linear, Tween.EaseType.In
         );
         tween.Start();
+
+        // Remove collision
+        var collision = GetNode<CollisionShape2D>("CollisionShape2D");
+        RemoveChild(collision);
+        collision.QueueFree();
 
         var timer = new Timer();
         timer.OneShot = true;
