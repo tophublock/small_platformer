@@ -31,6 +31,16 @@ public class Player : KinematicBody2D
     {
         _motion.x = 0;
         _motion.y += GRAVITY;
+
+        HandleWalking();
+        HandleJumping();
+        HandleShooting();
+
+        _motion = this.MoveAndSlide(_motion, UP);
+    }
+
+    private void HandleWalking()
+    {
         if (Input.IsActionPressed("ui_right"))
         {
             _motion.x += SPEED;
@@ -49,7 +59,10 @@ public class Player : KinematicBody2D
                 FaceLeft();
             }
         }
+    }
 
+    private void HandleJumping()
+    {
         if (this.IsOnFloor())
         {
             if (Input.IsActionPressed("ui_up"))
@@ -65,14 +78,15 @@ public class Player : KinematicBody2D
         {
             PlayAnimation("jump");
         }
+    }
 
+    private void HandleShooting()
+    {
         if (Input.IsActionJustPressed("ui_select") && _weapon != null)
         {
             Console.WriteLine("shoot");
             _weapon.Shoot();
         }
-
-        _motion = this.MoveAndSlide(_motion, UP);
     }
 
     private void FaceRight()

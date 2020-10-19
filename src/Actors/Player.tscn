@@ -29,6 +29,11 @@ animations = [ {
 "name": "hit",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "crouch",
+"speed": 0.0
+}, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "climb",
@@ -38,11 +43,6 @@ animations = [ {
 "loop": false,
 "name": "jump",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "crouch",
-"speed": 0.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
