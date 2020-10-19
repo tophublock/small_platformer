@@ -22,6 +22,12 @@ public class Enemy : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
+        // Don't move if dead
+        if (_isDead)
+        {
+            return;
+        }
+
         _sprite.Play("walk");
         _motion.x = SPEED * Direction.x;
         _motion.y += GRAVITY;
@@ -68,6 +74,7 @@ public class Enemy : KinematicBody2D
     {
         Console.WriteLine("enemy dies");
         _isDead = true;
+        _sprite.Play("death");
         // Fade out enemy
         var tween = GetNode<Tween>("Tween");
         var startColor = new Color(1.0f, 1.0f, 1.0f);
