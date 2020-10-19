@@ -46,7 +46,7 @@ public class Player : KinematicBody2D
             PlayAnimation("walk");
             if (Direction != Vector2.Right)
             {
-                FaceRight();
+                FlipHDirection();
             }
         }
         else if (Input.IsActionPressed("ui_left"))
@@ -55,7 +55,7 @@ public class Player : KinematicBody2D
             PlayAnimation("walk");
             if (Direction == Vector2.Right)
             {
-                FaceLeft();
+                FlipHDirection();
             }
         }
     }
@@ -88,29 +88,18 @@ public class Player : KinematicBody2D
         }
     }
 
-    private void FaceRight()
+    private void FlipHDirection()
     {
-        Console.WriteLine("facing right");
-        Direction = Vector2.Right;
-        _playerSprite.FlipH = false;
-        if (_weapon != null)
-        {
-            _weapon.Direction = Vector2.Right;
-            _weapon.Position = _weaponPosition.Position;
-            _weaponSprite.Scale = new Vector2(1, 1);
-        }
-    }
+        Console.WriteLine("flip direction");
+        Direction.x *= -1;
+        _playerSprite.FlipH = !_playerSprite.FlipH;
 
-    private void FaceLeft()
-    {
-        Console.WriteLine("facing left");
-        Direction = Vector2.Left;
-        _playerSprite.FlipH = true;
+        // Flip weapon sprite
         if (_weapon != null)
         {
-            _weapon.Direction = Vector2.Left;
-            _weapon.Position = new Vector2(-_weaponPosition.Position.x, _weaponPosition.Position.y);
-            _weaponSprite.Scale = new Vector2(-1, 1);
+            _weapon.Direction.x *= -1;
+            _weapon.Position = new Vector2(_weaponPosition.Position.x * Direction.x, _weaponPosition.Position.y);
+            _weaponSprite.Scale = new Vector2(Direction.x, 1);
         }
     }
 
