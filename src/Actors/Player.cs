@@ -5,6 +5,7 @@ public class Player : KinematicBody2D
 {
     const int GRAVITY = 20;
     const int SPEED = 125;
+    const int HIT_POWER = 50;
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
     public Vector2 Direction;
@@ -29,13 +30,34 @@ public class Player : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
+        ProcessState();
+
         _motion.x = 0;
         _motion.y += GRAVITY;
+        if (_isHit)
+        {
+            _motion.x -= HIT_POWER * Direction.x;
+        }
+        else
+        {
+            HandleWalking();
+            HandleJumping();
+            HandleShooting();
+        }
 
-        HandleWalking();
-        HandleJumping();
-        HandleShooting();
         _motion = this.MoveAndSlide(_motion, UP);
+    }
+
+    // Take care of any player states that need to expire
+    private void ProcessState()
+    {
+        if (_playerSprite.Animation == "hit")
+        {
+            if (_playerSprite.Frame == _playerSprite.Frames.GetFrameCount("hit") - 1)
+            {
+                _isHit = false;
+            }
+        }
     }
 
     private void HandleWalking()
@@ -134,7 +156,6 @@ public class Player : KinematicBody2D
             _playerSprite.Play(animation);
         }
     }
-
     public void PickUpObject(Node obj)
     {
         Console.WriteLine("picked up object");
