@@ -24,6 +24,10 @@ public class Bullet : Area2D
 
     public void OnBulletBodyEntered(Node body)
     {
+        if (body is Enemy enemy)
+        {
+            enemy.Hit();
+        }
         QueueFree();
     }
 }

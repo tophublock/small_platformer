@@ -7,10 +7,11 @@ public class Player : KinematicBody2D
     const int SPEED = 125;
     const int HIT_POWER = 75;
     const int JUMP_POWER = -350;
-    public Vector2 UP = Vector2.Up;
+    public Vector2 UP = Vector2.Up; // const
+    
+    public int Health = 5;
     public Vector2 Direction;
     private bool _isHit = false;
-    private int _health = 5;
     private Vector2 _motion;
     private AnimatedSprite _playerSprite;
     private Sprite _weaponSprite;
@@ -131,10 +132,6 @@ public class Player : KinematicBody2D
     private void PlayAnimation(string animation)
     {
         string currAnimation = _playerSprite.Animation;
-        Console.WriteLine("currently playing");
-        Console.WriteLine(currAnimation);
-        Console.WriteLine("want to play");
-        Console.WriteLine(animation);
         if (animation == "hit")
         {
             _playerSprite.Play(animation);
@@ -185,9 +182,9 @@ public class Player : KinematicBody2D
     {
         Console.WriteLine("hit");
         _isHit = true;
-        _health--;
+        Health--;
         PlayAnimation("hit");
-        if (_health == 0)
+        if (Health == 0)
         {
             Die();
         }

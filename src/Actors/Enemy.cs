@@ -5,7 +5,9 @@ public class Enemy : KinematicBody2D
 {
     const int GRAVITY = 20;
     const int SPEED = 125;
-    public Vector2 UP = Vector2.Up;
+    public Vector2 UP = Vector2.Up; // const
+
+    public int Health = 2;
     public Vector2 Direction = Vector2.Left;
     private Vector2 _motion;
     private AnimatedSprite _sprite;
@@ -48,6 +50,15 @@ public class Enemy : KinematicBody2D
             {
                 player.Hit();
             }
+        }
+    }
+
+    public void Hit()
+    {
+        Health--;
+        if (Health == 0)
+        {
+            // Die
         }
     }
 }
