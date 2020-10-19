@@ -35,7 +35,6 @@ public class Player : KinematicBody2D
         HandleWalking();
         HandleJumping();
         HandleShooting();
-
         _motion = this.MoveAndSlide(_motion, UP);
     }
 
