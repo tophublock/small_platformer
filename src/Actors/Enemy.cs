@@ -5,6 +5,7 @@ public class Enemy : KinematicBody2D
 {
     const int GRAVITY = 20;
     const int SPEED = 125;
+    const float DEATH_TIME = 1.0f;
     public Vector2 UP = Vector2.Up; // const
 
     public int Health = 2;
@@ -80,7 +81,7 @@ public class Enemy : KinematicBody2D
         var startColor = new Color(1.0f, 1.0f, 1.0f);
         var endColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         tween.InterpolateProperty(
-            this, "modulate", startColor, endColor, 1.0f, Tween.TransitionType.Linear, Tween.EaseType.In
+            this, "modulate", startColor, endColor, DEATH_TIME, Tween.TransitionType.Linear, Tween.EaseType.In
         );
         tween.Start();
 
@@ -89,11 +90,12 @@ public class Enemy : KinematicBody2D
         RemoveChild(collision);
         collision.QueueFree();
 
+        // Remove enemy after tween completes
         var timer = new Timer();
         timer.OneShot = true;
         timer.Connect("timeout", this, nameof(Die));
         AddChild(timer);
-        timer.Start(1.0f);
+        timer.Start(DEATH_TIME);
     }
 
     private void Die()
