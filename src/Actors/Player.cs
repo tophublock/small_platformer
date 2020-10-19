@@ -7,8 +7,8 @@ public class Player : KinematicBody2D
     const int SPEED = 125;
     const int JUMP_POWER = -350;
     public Vector2 UP = Vector2.Up;
+    public Vector2 Direction;
     private bool _isHit = false;
-    private bool _isFacingRight; // TODO: replace with Vector2 Direction
     private int _health = 5;
     private Vector2 _motion;
     private AnimatedSprite _playerSprite;
@@ -18,7 +18,7 @@ public class Player : KinematicBody2D
 
     public override void _Ready()
     {
-        _isFacingRight = true;
+        Direction = Vector2.Right;
         _playerSprite = GetNode<AnimatedSprite>("PlayerSprite");
         _playerSprite.Play("idle");
 
@@ -44,7 +44,7 @@ public class Player : KinematicBody2D
         {
             _motion.x += SPEED;
             PlayAnimation("walk");
-            if (!_isFacingRight)
+            if (Direction != Vector2.Right)
             {
                 FaceRight();
             }
@@ -53,7 +53,7 @@ public class Player : KinematicBody2D
         {
             _motion.x -= SPEED;
             PlayAnimation("walk");
-            if (_isFacingRight)
+            if (Direction == Vector2.Right)
             {
                 FaceLeft();
             }
@@ -91,7 +91,7 @@ public class Player : KinematicBody2D
     private void FaceRight()
     {
         Console.WriteLine("facing right");
-        _isFacingRight = true;
+        Direction = Vector2.Right;
         _playerSprite.FlipH = false;
         if (_weapon != null)
         {
@@ -104,7 +104,7 @@ public class Player : KinematicBody2D
     private void FaceLeft()
     {
         Console.WriteLine("facing left");
-        _isFacingRight = false;
+        Direction = Vector2.Left;
         _playerSprite.FlipH = true;
         if (_weapon != null)
         {
