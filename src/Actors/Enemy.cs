@@ -9,6 +9,7 @@ public class Enemy : KinematicBody2D
 
     public int Health = 2;
     public Vector2 Direction = Vector2.Left;
+    private bool _isDead = false;
     private Vector2 _motion;
     private AnimatedSprite _sprite;
     private RayCast2D _rayCast;
@@ -55,10 +56,35 @@ public class Enemy : KinematicBody2D
 
     public void Hit()
     {
+        Console.WriteLine("hit enemy");
         Health--;
         if (Health == 0)
         {
-            // Die
+            Fade();
         }
+    }
+
+    private void Fade()
+    {
+        Console.WriteLine("enemy dies");
+        _isDead = true;
+        // Fade out enemy
+        var tween = GetNode<Tween>("Tween");
+        var startColor = new Color(1.0f, 1.0f, 1.0f);
+        var endColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        tween.InterpolateProperty(
+            this, "modulate", startColor, endColor, 1.0f, Tween.TransitionType.Linear, Tween.EaseType.In
+        );
+
+        var timer = new Timer();
+        timer.OneShot = true;
+        timer.Connect("timeout", this, nameof(Die));
+        AddChild(timer);
+        timer.Start(1.0f);
+    }
+
+    private void Die()
+    {
+        QueueFree();
     }
 }
