@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/environment/backgrounds.png" type="Texture" id=1]
 [ext_resource path="res://assets/environment/tilemap.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/VT323-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/ui/Bungee-Regular.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 21, 21, 0, 21, 0, 7.62939e-06, 21, 7.62939e-06 )
@@ -245,6 +247,14 @@ points = PoolVector2Array( 21, 21, 7.62939e-06, 21, 7.62939e-06, 7.62939e-06, 21
 } ]
 9/z_index = 0
 
+[sub_resource type="DynamicFont" id=12]
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 4 )
+
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -266,4 +276,64 @@ scale = Vector2( 2, 2 )
 tile_set = SubResource( 11 )
 cell_size = Vector2( 21, 21 )
 format = 1
-tile_data = PoolIntArray( 262144, 2, 0, 262145, 2, 0, 262146, 2, 0, 262147, 2, 0, 262148, 2, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 262152, 2, 0, 262153, 2, 0, 262154, 2, 0, 262155, 2, 0, 327680, 6, 0, 327681, 6, 0, 327682, 6, 0, 327683, 6, 0, 327684, 6, 0, 327685, 6, 0, 327686, 6, 0, 327687, 6, 0, 327688, 6, 0, 327689, 6, 0, 327690, 6, 0, 327691, 6, 0, 327692, 2, 0, 327693, 2, 0, 327694, 2, 0, 327695, 2, 0, 327696, 2, 0, 327697, 2, 0, 393216, 6, 0, 393217, 6, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0, 524284, 2, 0, 524285, 2, 0, 524286, 2, 0, 524287, 2, 0, 458752, 2, 0, 458753, 2, 0 )
+tile_data = PoolIntArray( 262144, 2, 0, 262145, 2, 0, 262146, 2, 0, 262147, 2, 0, 262148, 2, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 262152, 2, 0, 262153, 2, 0, 262154, 2, 0, 262155, 2, 0, 327680, 6, 0, 327681, 6, 0, 327682, 6, 0, 327683, 6, 0, 327684, 6, 0, 327685, 6, 0, 327686, 6, 0, 327687, 6, 0, 327688, 6, 0, 327689, 6, 0, 327690, 6, 0, 327691, 6, 0, 393216, 6, 0, 393217, 6, 0, 393218, 6, 0, 393219, 6, 0, 393220, 6, 0, 393221, 6, 0, 393222, 6, 0, 393223, 6, 0, 393224, 6, 0, 393225, 6, 0, 393226, 6, 0, 393227, 6, 0 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -148.0
+margin_right = 148.0
+margin_bottom = 168.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 40
+custom_constants/margin_left = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 40.0
+margin_right = 276.0
+margin_bottom = 267.0
+custom_constants/separation = 40
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color_shadow = Color( 0.670588, 0.670588, 0.670588, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Pixel Platformer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 256.0
+margin_bottom = 157.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 13 )
+text = "Start"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 27.0
+margin_right = 256.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 13 )
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 256.0
+margin_bottom = 77.0
+custom_fonts/font = SubResource( 13 )
+text = "Quit"
