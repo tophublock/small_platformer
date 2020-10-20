@@ -6,7 +6,7 @@ public class Player : KinematicBody2D
     const int GRAVITY = 20;
     const int SPEED = 125;
     const int HIT_POWER = 75;
-    const int JUMP_POWER = -350;
+    const int JUMP_POWER = -375;
     public Vector2 UP = Vector2.Up; // const
     
     public int Health = 5;
