@@ -469,19 +469,6 @@ points = PoolVector2Array( 21, 21, 7.62939e-06, 21, 7.62939e-06, 7.62939e-06, 21
 
 [node name="Game" type="Node"]
 
-[node name="Background" type="TextureRect" parent="."]
-visible = false
-margin_left = -42.0
-margin_right = 322.0
-margin_bottom = 189.0
-rect_scale = Vector2( 4.5, 4.5 )
-rect_clip_content = true
-texture = ExtResource( 5 )
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 84, 105 )
 scale = Vector2( 2, 2 )
