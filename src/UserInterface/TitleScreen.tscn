@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/environment/backgrounds.png" type="Texture" id=1]
 [ext_resource path="res://assets/environment/tilemap.png" type="Texture" id=2]
@@ -253,8 +253,32 @@ size = 40
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.223529, 0.223529, 0.223529, 0.552941 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+shadow_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.101961, 0.101961, 0.101961, 0.733333 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+shadow_color = Color( 0, 0, 0, 0 )
+
 [sub_resource type="StyleBoxFlat" id=14]
-bg_color = Color( 0.435294, 0.435294, 0.435294, 0.392157 )
+bg_color = Color( 0.403922, 0.403922, 0.403922, 0.262745 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -341,6 +365,9 @@ __meta__ = {
 [node name="Start" type="Button" parent="TitleContent/VBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 100.0
 margin_bottom = 17.0
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/focus = SubResource( 15 )
 custom_styles/normal = SubResource( 14 )
 custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -350,6 +377,9 @@ text = "Start"
 margin_top = 31.0
 margin_right = 100.0
 margin_bottom = 48.0
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/focus = SubResource( 15 )
 custom_styles/normal = SubResource( 14 )
 custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -359,7 +389,13 @@ text = "Settings"
 margin_top = 62.0
 margin_right = 100.0
 margin_bottom = 79.0
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/focus = SubResource( 15 )
 custom_styles/normal = SubResource( 14 )
 custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Quit"
+[connection signal="pressed" from="TitleContent/VBoxContainer/CenterContainer/VBoxContainer/Start" to="." method="OnStartPressed"]
+[connection signal="pressed" from="TitleContent/VBoxContainer/CenterContainer/VBoxContainer/Settings" to="." method="OnSettingsPressed"]
+[connection signal="pressed" from="TitleContent/VBoxContainer/CenterContainer/VBoxContainer/Quit" to="." method="OnQuitPressed"]
