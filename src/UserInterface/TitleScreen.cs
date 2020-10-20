@@ -22,6 +22,7 @@ public class TitleScreen : Control
     public void OnStartPressed()
     {
         // Load Game
+        GetTree().ChangeScene("res://src/Main/Game.tscn");
     }
 
     public void OnSettingsPressed()
@@ -30,6 +31,6 @@ public class TitleScreen : Control
     }
     public void OnQuitPressed()
     {
-        GetTree.Quit();
+        GetTree().Quit();
     }
 }
