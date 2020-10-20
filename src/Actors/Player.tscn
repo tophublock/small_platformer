@@ -73,10 +73,11 @@ shape = SubResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 limit_left = 0
-limit_top = 0
+limit_top = -50
 limit_right = 1440
 limit_bottom = 314
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
-smoothing_speed = 8.0
+smoothing_speed = 6.0
+editor_draw_limits = true
