@@ -4,12 +4,14 @@ using System;
 public class Weapon : Area2D
 {
     public Vector2 Direction = Vector2.Right;
+    private AudioStreamPlayer2D _audio;
     private Position2D _bulletStartPosition;
     private Position2D _bulletStartPositionMirrored;
     private PackedScene _bulletScene;
 
     public override void _Ready()
     {
+        _audio = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
         _bulletStartPosition = GetNode<Position2D>("BulletPosition");
         _bulletStartPositionMirrored = new Position2D();
         _bulletStartPositionMirrored.Position = new Vector2(-_bulletStartPosition.Position.x, _bulletStartPosition.Position.y);
@@ -41,5 +43,6 @@ public class Weapon : Area2D
 
         Node game = GetTree().Root.GetNode("Game");
         game.AddChild(b);
+        _audio.Play();
     }
 }
