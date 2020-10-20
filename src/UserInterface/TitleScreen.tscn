@@ -259,10 +259,10 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
 shadow_color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="DynamicFont" id=13]
@@ -277,8 +277,8 @@ __meta__ = {
 }
 
 [node name="Background" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 231.0
+margin_bottom = 189.0
 rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 __meta__ = {
@@ -295,9 +295,9 @@ tile_data = PoolIntArray( 262144, 2, 0, 262145, 2, 0, 262146, 2, 0, 262147, 2, 0
 [node name="TitleContent" type="MarginContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -148.0
-margin_right = 148.0
-margin_bottom = 210.0
+margin_left = -168.0
+margin_right = 168.0
+margin_bottom = 231.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 40
 custom_constants/margin_left = 20
@@ -308,35 +308,38 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleContent"]
 margin_left = 20.0
 margin_top = 40.0
-margin_right = 276.0
+margin_right = 316.0
 margin_bottom = 231.0
 custom_constants/separation = 40
 
 [node name="Title" type="Label" parent="TitleContent/VBoxContainer"]
-margin_right = 256.0
+margin_right = 296.0
 margin_bottom = 40.0
 custom_fonts/font = SubResource( 12 )
 custom_colors/font_color_shadow = Color( 0.670588, 0.670588, 0.670588, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = "Pixel Platformer"
+align = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="TitleContent/VBoxContainer"]
+[node name="CenterContainer" type="HBoxContainer" parent="TitleContent/VBoxContainer"]
 margin_top = 80.0
-margin_right = 256.0
-margin_bottom = 151.0
+margin_right = 296.0
+margin_bottom = 159.0
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleContent/VBoxContainer/CenterContainer"]
-margin_left = 85.0
-margin_right = 170.0
-margin_bottom = 71.0
-custom_constants/separation = 10
+margin_left = 98.0
+margin_right = 198.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 100, 0 )
+custom_constants/separation = 14
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Start" type="Button" parent="TitleContent/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_right = 85.0
+margin_right = 100.0
 margin_bottom = 17.0
 custom_styles/normal = SubResource( 14 )
 custom_fonts/font = SubResource( 13 )
@@ -344,18 +347,18 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Start"
 
 [node name="Settings" type="Button" parent="TitleContent/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 27.0
-margin_right = 85.0
-margin_bottom = 44.0
+margin_top = 31.0
+margin_right = 100.0
+margin_bottom = 48.0
 custom_styles/normal = SubResource( 14 )
 custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Settings"
 
 [node name="Quit" type="Button" parent="TitleContent/VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 54.0
-margin_right = 85.0
-margin_bottom = 71.0
+margin_top = 62.0
+margin_right = 100.0
+margin_bottom = 79.0
 custom_styles/normal = SubResource( 14 )
 custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
