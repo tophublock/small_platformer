@@ -8,7 +8,7 @@ public class Player : KinematicBody2D
     const int HIT_POWER = 75;
     const int JUMP_POWER = -375;
     public Vector2 UP = Vector2.Up; // const
-    
+
     public int Health = 5;
     public Vector2 Direction;
     private bool _isHit = false;
@@ -17,6 +17,7 @@ public class Player : KinematicBody2D
     private Sprite _weaponSprite;
     private Position2D _weaponPosition;
     private Weapon _weapon;
+    private Camera2D _camera;
 
     public override void _Ready()
     {
@@ -27,6 +28,8 @@ public class Player : KinematicBody2D
         _weapon = null;
         _weaponSprite = null;
         _weaponPosition = GetNode<Position2D>("WeaponPosition");
+
+        _camera = GetNode<Camera2D>("Camera2D");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -182,6 +185,7 @@ public class Player : KinematicBody2D
     {
         Console.WriteLine("hit");
         _isHit = true;
+        ShakeScreen(0.5f, 3);
         Health--;
         PlayAnimation("hit");
         if (Health == 0)
@@ -190,7 +194,33 @@ public class Player : KinematicBody2D
         }
     }
 
-    public void Die()
+    // Shake screen for given duration by a shift of the given pixels
+    // shakeDuration is how long to shake the screen in seconds, and
+    // shakePower is how much the shake the screen by
+    private void ShakeScreen(float shakeDuration, int shakePower)
+    {
+        var tween = _camera.GetNode<Tween>("Tween");
+        tween.InterpolateMethod(
+            this, 
+            nameof(MoveCamera), 
+            new Vector2(shakePower, shakePower), 
+            Vector2.Zero, shakeDuration, 
+            Tween.TransitionType.Sine, 
+            Tween.EaseType.Out,
+            0
+        );
+        tween.Start();
+    }
+
+    private void MoveCamera(Vector2 shakePowerVector)
+    {
+        var rand = new Random();
+        int x = (int)shakePowerVector.x;
+        int y = (int)shakePowerVector.y;
+        _camera.Offset = new Vector2(rand.Next(-x, x), rand.Next(-y, y));
+    }
+
+    private void Die()
     {
         // Fade away player
         //QueueFree();
