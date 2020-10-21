@@ -22,7 +22,7 @@ public class TitleScreen : Control
     public void OnStartPressed()
     {
         // Load Game
-        GetTree().ChangeScene("res://src/Main/Game.tscn");
+        GetTree().ChangeScene("res://src/Main/Level0.tscn");
     }
 
     public void OnSettingsPressed()
