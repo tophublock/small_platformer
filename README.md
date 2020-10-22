@@ -11,6 +11,9 @@ I followed UmaiPixel's helpful [video series](https://www.youtube.com/playlist?l
 - 2D Game in Godot
 - Understanding the difference between KinematicBody2d and Area2D (and RigidBody2D and StaticBody2D)
 - AnimatedSprites
+- Camera2D
+- Game Levels/Stages and level transitions
+- Tilesets and tilemaps
 
 ## Credit
 
