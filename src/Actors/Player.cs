@@ -3,6 +3,9 @@ using System;
 
 public class Player : KinematicBody2D
 {
+    [Signal]
+    public delegate void UpdateStats(int lives);
+
     const int GRAVITY = 20;
     const int SPEED = 125;
     const int HIT_POWER = 75;
@@ -20,7 +23,7 @@ public class Player : KinematicBody2D
     private Position2D _weaponPosition;
     private Tween _tween;
     private Weapon _weapon;
-    private Camera2D _camera;
+    private Camera2D _camera;   
 
     public override void _Ready()
     {
@@ -220,15 +223,16 @@ public class Player : KinematicBody2D
 
     public void Hit()
     {
-        Console.WriteLine("hit");
         _isHit = true;
-        ShakeScreen(0.5f, 3);
         Health--;
         PlayAnimation("hit");
         if (Health == 0)
         {
             Die();
         }
+
+        ShakeScreen(0.5f, 3);
+        EmitSignal(nameof(UpdateStats), Health);
     }
 
     // Shake screen for given duration by a shift of the given pixels
