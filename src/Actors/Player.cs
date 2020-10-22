@@ -43,7 +43,7 @@ public class Player : KinematicBody2D
         _tween = GetNode<Tween>("Tween");
         _tween.Connect("tween_completed", this, nameof(CompleteLoading));
 
-        SpawnPlayer(2.0f);
+        SpawnPlayer(1.5f);
         _lastFloorPosition = this.Position;
     }
 
