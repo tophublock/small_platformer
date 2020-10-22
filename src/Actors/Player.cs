@@ -6,6 +6,7 @@ public class Player : KinematicBody2D
     [Signal]
     public delegate void UpdateStats(int lives);
 
+    const float DEATH_TIME = 2.0f;
     const int GRAVITY = 20;
     const int SPEED = 125;
     const int HIT_POWER = 75;
@@ -223,6 +224,11 @@ public class Player : KinematicBody2D
 
     public void Hit()
     {
+        if (_isLoading)
+        {
+            return;
+        }
+
         _isHit = true;
         Health--;
         PlayAnimation("hit");
@@ -263,8 +269,36 @@ public class Player : KinematicBody2D
 
     private void Die()
     {
-        // Fade away player
-        //QueueFree();
+        // Don't let player move
+        PlayAnimation("hit");
+        _isLoading = true;
+
+        // Fade away
+        var startColor = new Color(1.0f, 1.0f, 1.0f);
+        var endColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        _tween.InterpolateProperty(
+            this, 
+            "modulate", 
+            startColor, 
+            endColor, 
+            DEATH_TIME, 
+            Tween.TransitionType.Linear, 
+            Tween.EaseType.In
+        );
+
+        // Remove player after tween completes
+        var timer = new Timer();
+        timer.OneShot = true;
+        timer.Connect("timeout", this, nameof(RemovePlayer));
+        AddChild(timer);
+
+        _tween.Start();
+        timer.Start(DEATH_TIME);
+    }
+
+    private void RemovePlayer()
+    {
+        QueueFree();
     }
 
     // Respawn the player if it falls off
