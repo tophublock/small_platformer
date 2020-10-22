@@ -14,11 +14,13 @@ public class Enemy : KinematicBody2D
     private Vector2 _motion;
     private AnimatedSprite _sprite;
     private RayCast2D _rayCast;
+    private Area2D _top;
 
     public override void _Ready()
     {
         _sprite = GetNode<AnimatedSprite>("AnimatedSprite");
         _rayCast = GetNode<RayCast2D>("RayCast2D");
+        _top = GetNode<Area2D>("Area2D");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -55,6 +57,15 @@ public class Enemy : KinematicBody2D
         {
             var collision = GetSlideCollision(i);
             if (collision.Collider is Player player)
+            {
+                player.Hit();
+            }
+        }
+
+        var bodies = _top.GetOverlappingBodies();
+        foreach (Node body in bodies)
+        {
+            if (body is Player player)
             {
                 player.Hit();
             }

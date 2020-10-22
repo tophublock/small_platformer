@@ -29,10 +29,10 @@ animations = [ {
 "name": "fly",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": false,
-"name": "hit",
-"speed": 5.0
+"name": "crouch",
+"speed": 0.0
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": false,
@@ -44,10 +44,10 @@ animations = [ {
 "name": "climb",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 8 ) ],
 "loop": false,
-"name": "crouch",
-"speed": 0.0
+"name": "hit",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
