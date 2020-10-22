@@ -17,6 +17,8 @@ public class Player : KinematicBody2D
     public Vector2 Direction;
     private bool _isHit = false;
     private bool _isLoading = false;
+    private float _immunityDurationSec = 1.0f;
+    private float _immunityLeftSec = 1.0f;
     private Vector2 _motion;
     private Vector2 _lastFloorPosition;
     private AnimatedSprite _playerSprite;
@@ -69,7 +71,7 @@ public class Player : KinematicBody2D
             return;
         }
  
-        ProcessState();
+        ProcessState(delta);
 
         _motion.x = 0;
         _motion.y += GRAVITY;
@@ -93,7 +95,7 @@ public class Player : KinematicBody2D
     }
 
     // Take care of any player states that need to expire
-    private void ProcessState()
+    private void ProcessState(float delta)
     {
         if (_playerSprite.Animation == "hit")
         {
@@ -102,6 +104,8 @@ public class Player : KinematicBody2D
                 _isHit = false;
             }
         }
+
+        _immunityLeftSec -= delta;
     }
 
     private void HandleWalking()
@@ -224,19 +228,25 @@ public class Player : KinematicBody2D
 
     public void Hit()
     {
-        if (_isLoading)
+        if (_isLoading || _immunityLeftSec > 0.0f)
         {
             return;
         }
 
         _isHit = true;
         Health--;
-        PlayAnimation("hit");
         if (Health == 0)
         {
             Die();
         }
+        else
+        {
+            // Add temporary immunity
+            _immunityLeftSec = _immunityDurationSec;
+        }
 
+        // Visuals
+        PlayAnimation("hit");
         ShakeScreen(0.5f, 3);
         EmitSignal(nameof(UpdateStats), Health);
     }
@@ -267,6 +277,7 @@ public class Player : KinematicBody2D
         _camera.Offset = new Vector2(rand.Next(-x, x), rand.Next(-y, y));
     }
 
+    // TODO: refactor
     private void Die()
     {
         // Don't let player move
