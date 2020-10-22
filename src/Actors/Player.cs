@@ -12,6 +12,7 @@ public class Player : KinematicBody2D
     public int Health = 5;
     public Vector2 Direction;
     private bool _isHit = false;
+    private bool _isLoading = false;
     private Vector2 _motion;
     private AnimatedSprite _playerSprite;
     private Sprite _weaponSprite;
@@ -30,10 +31,33 @@ public class Player : KinematicBody2D
         _weaponPosition = GetNode<Position2D>("WeaponPosition");
 
         _camera = GetNode<Camera2D>("Camera2D");
+
+        // Fade in player
+        var tween = GetNode<Tween>("Tween");
+        var startColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        var endColor = new Color(1.0f, 1.0f, 1.0f);
+        tween.InterpolateProperty(
+            this, 
+            "modulate", 
+            startColor, 
+            endColor, 
+            2.0f, 
+            Tween.TransitionType.Linear, 
+            Tween.EaseType.In
+        );
+        tween.Connect("tween_completed", this, nameof(CompleteLoading));
+
+        tween.Start();
+        _isLoading = true;
     }
 
     public override void _PhysicsProcess(float delta)
     {
+        if (_isLoading)
+        {
+            return;
+        }
+ 
         ProcessState();
 
         _motion.x = 0;
@@ -50,6 +74,11 @@ public class Player : KinematicBody2D
         }
 
         _motion = this.MoveAndSlide(_motion, UP);
+    }
+
+    public void CompleteLoading(Godot.Object obj, NodePath key)
+    {
+        _isLoading = false;
     }
 
     // Take care of any player states that need to expire
