@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/objects/life.png" type="Texture" id=1]
+[ext_resource path="res://assets/ui/VT323-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.392157 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 2 )
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 63.0
+margin_bottom = 40.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 51.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/CenterContainer"]
+margin_top = 4.0
+margin_right = 63.0
+margin_bottom = 35.0
+custom_constants/margin_right = 3
+custom_constants/margin_top = 3
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/MarginContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 60.0
+margin_bottom = 28.0
+custom_constants/separation = 5
+
+[node name="TextureRect" type="TextureRect" parent="Panel/CenterContainer/MarginContainer/HBoxContainer"]
+margin_right = 21.0
+margin_bottom = 25.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/MarginContainer/HBoxContainer"]
+margin_left = 26.0
+margin_right = 57.0
+margin_bottom = 25.0
+custom_constants/separation = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="x" type="Label" parent="Panel/CenterContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 2 )
+text = "x"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lives" type="Label" parent="Panel/CenterContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+margin_left = 11.0
+margin_right = 31.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 2 )
+text = "##"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
