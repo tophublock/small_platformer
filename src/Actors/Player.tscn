@@ -86,3 +86,6 @@ editor_draw_limits = true
 [node name="Tween" type="Tween" parent="Camera2D"]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="OnVisibilityNotifier2DScreenExited"]

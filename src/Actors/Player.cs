@@ -14,9 +14,11 @@ public class Player : KinematicBody2D
     private bool _isHit = false;
     private bool _isLoading = false;
     private Vector2 _motion;
+    private Vector2 _lastFloorPosition;
     private AnimatedSprite _playerSprite;
     private Sprite _weaponSprite;
     private Position2D _weaponPosition;
+    private Tween _tween;
     private Weapon _weapon;
     private Camera2D _camera;
 
@@ -32,22 +34,27 @@ public class Player : KinematicBody2D
 
         _camera = GetNode<Camera2D>("Camera2D");
 
-        // Fade in player
-        var tween = GetNode<Tween>("Tween");
+        _tween = GetNode<Tween>("Tween");
+        _tween.Connect("tween_completed", this, nameof(CompleteLoading));
+
+        SpawnPlayer(2.0f);
+        _lastFloorPosition = this.Position;
+    }
+
+    private void SpawnPlayer(float spawnDuration)
+    {
         var startColor = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         var endColor = new Color(1.0f, 1.0f, 1.0f);
-        tween.InterpolateProperty(
+        _tween.InterpolateProperty(
             this, 
             "modulate", 
             startColor, 
             endColor, 
-            2.0f, 
+            spawnDuration, 
             Tween.TransitionType.Linear, 
             Tween.EaseType.In
         );
-        tween.Connect("tween_completed", this, nameof(CompleteLoading));
-
-        tween.Start();
+        _tween.Start();
         _isLoading = true;
     }
 
@@ -119,6 +126,7 @@ public class Player : KinematicBody2D
     {
         if (this.IsOnFloor())
         {
+            _lastFloorPosition = this.Position;
             if (Input.IsActionPressed("ui_up"))
             {
                 _motion.y += JUMP_POWER;
@@ -253,5 +261,18 @@ public class Player : KinematicBody2D
     {
         // Fade away player
         //QueueFree();
+    }
+
+    // Respawn the player if it falls off
+    public void OnVisibilityNotifier2DScreenExited()
+    {
+        // Respawn player
+        float offsetX = 15;
+        if (this.Direction == Vector2.Left)
+        {
+            offsetX *= -1;
+        }
+        this.Position = new Vector2(_lastFloorPosition.x - offsetX, _lastFloorPosition.y - 15);
+        SpawnPlayer(1.0f);
     }
 }
