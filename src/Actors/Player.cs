@@ -5,6 +5,8 @@ public class Player : KinematicBody2D
 {
     [Signal]
     public delegate void UpdateStats(int lives);
+    [Signal]
+    public delegate void EndGame();
 
     const float DEATH_TIME = 2.0f;
     const int GRAVITY = 20;
@@ -310,6 +312,7 @@ public class Player : KinematicBody2D
     private void RemovePlayer()
     {
         QueueFree();
+        EmitSignal(nameof(EndGame));
     }
 
     // Respawn the player if it falls off
