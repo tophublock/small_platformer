@@ -1,8 +1,9 @@
 using Godot;
 using System;
 
-public class Level0 : Node
+public class Level : Node
 {
+    [Export]
     public string levelName;
     private HUD _hud;
     private Player _player;
@@ -10,11 +11,10 @@ public class Level0 : Node
 
     public override void _Ready()
     {
-        levelName = this.Name;
         _hud = GetNode<HUD>("HUD");
         _player = GetNode<Player>("Player");
         _gameOverScreen = ResourceLoader.Load("res://src/UserInterface/GameOverScreen.tscn") as PackedScene;
-    
+
         _hud.UpdateLives(_player.Health);
     }
 

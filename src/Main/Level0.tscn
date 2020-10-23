@@ -7,10 +7,11 @@
 [ext_resource path="res://src/Environment/Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Objects/LevelTransition.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UserInterface/HUD.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Main/Level0.cs" type="Script" id=8]
+[ext_resource path="res://src/Main/Level.cs" type="Script" id=8]
 
-[node name="Level0" type="Node"]
+[node name="Game" type="Node"]
 script = ExtResource( 8 )
+levelName = "Level0"
 
 [node name="TileMap" parent="." instance=ExtResource( 4 )]
 
