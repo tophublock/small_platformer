@@ -11,15 +11,18 @@ public class Level : Node
 
     public override void _Ready()
     {
-        _hud = GetNode<HUD>("HUD");
         _player = GetNode<Player>("Player");
         _gameOverScreen = ResourceLoader.Load("res://src/UserInterface/GameOverScreen.tscn") as PackedScene;
-
+        
+        var hudScene = ResourceLoader.Load("res://src/UserInterface/HUD.tscn") as PackedScene;
+        _hud = hudScene.Instance() as HUD;
+        AddChild(_hud);
         _hud.UpdateLives(_player.Health);
     }
 
     public void OnPlayerUpdateStats(int lives)
     {
+        Console.WriteLine("update stats");
         _hud.UpdateLives(lives);
     }
 
