@@ -9,7 +9,7 @@
 [ext_resource path="res://src/UserInterface/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Main/Level0.cs" type="Script" id=8]
 
-[node name="Game" type="Node"]
+[node name="Level0" type="Node"]
 script = ExtResource( 8 )
 
 [node name="TileMap" parent="." instance=ExtResource( 4 )]
