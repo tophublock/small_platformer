@@ -54,5 +54,3 @@ position = Vector2( 252, 184 )
 
 [node name="LevelTransition" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2269, 128 )
-[connection signal="EndGame" from="Player" to="." method="OnPlayerEndGame"]
-[connection signal="UpdateStats" from="Player" to="." method="OnPlayerUpdateStats"]
