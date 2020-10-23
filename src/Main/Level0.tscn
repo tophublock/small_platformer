@@ -56,4 +56,5 @@ position = Vector2( 252, 184 )
 position = Vector2( 2269, 128 )
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
+[connection signal="EndGame" from="Player" to="." method="OnPlayerEndGame"]
 [connection signal="UpdateStats" from="Player" to="." method="OnPlayerUpdateStats"]

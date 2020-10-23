@@ -21,4 +21,10 @@ public class Level0 : Node
     {
         _hud.UpdateLives(lives);
     }
+
+    public void OnPlayerEndGame()
+    {
+        var gameOver = _gameOverScreen.Instance() as GameOverScreen;
+        AddChild(gameOver);
+    }
 }
