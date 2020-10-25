@@ -4,6 +4,11 @@ A small platformer made using C# in Godot.
 
 I followed UmaiPixel's helpful [video series](https://www.youtube.com/playlist?list=PLyckz_-Rzq6ClGevL2fneJ5YJnMPKWa4M) on making a platformer in Godot to get started.
 
+## Image Previews
+
+<img src="https://github.com/aim4/small_platformer/blob/master/previews/main_menu.png" alt="SmallPlatformer preview, main men" width="300" height="450"/>
+<img src="https://github.com/aim4/small_platformer/blob/master/previews/in_game.png" alt="SmallPlatformer preview, in game" width="300" height="450"/>
+<img src="https://github.com/aim4/small_platformer/blob/master/previews/game_over.png" alt="SmallPlatformer preview, game over" width="300" height="450"/>
 
 ## Key Takeaways
 
