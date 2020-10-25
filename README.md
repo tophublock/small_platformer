@@ -6,9 +6,9 @@ I followed UmaiPixel's helpful [video series](https://www.youtube.com/playlist?l
 
 ## Image Previews
 
-<img src="https://github.com/aim4/small_platformer/blob/main/previews/main_menu.png" alt="SmallPlatformer preview, main men" width="450" height="300"/>
-<img src="https://github.com/aim4/small_platformer/blob/main/previews/in_game.png" alt="SmallPlatformer preview, in game" width="450" height="300"/>
-<img src="https://github.com/aim4/small_platformer/blob/main/previews/game_over.png" alt="SmallPlatformer preview, game over" width="450" height="300"/>
+<img src="https://github.com/aim4/small_platformer/blob/main/previews/main_menu.png" alt="SmallPlatformer preview, main men" width="500" height="300"/>
+<img src="https://github.com/aim4/small_platformer/blob/main/previews/in_game.png" alt="SmallPlatformer preview, in game" width="500" height="300"/>
+<img src="https://github.com/aim4/small_platformer/blob/main/previews/game_over.png" alt="SmallPlatformer preview, game over" width="500" height="300"/>
 
 ## Key Takeaways
 
